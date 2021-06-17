@@ -1,13 +1,13 @@
 export enum actionTypes{
 }
 
-export interface Task {
+export interface TaskType {
   createAt: string,
   isDone: false,
   list: string,
   taskName: string
 }
 
-export interface Tasks {
-  tasks: Task[]
+export interface TasksType {
+  tasks: TaskType[]
 }

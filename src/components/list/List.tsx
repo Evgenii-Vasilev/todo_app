@@ -3,15 +3,16 @@ import { useParams } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import createTask from '../../firebase/functions/createTask'
 import todoFireHook from '../../firebase/hooks/todoFireHook'
-import { Tasks } from '../../types/todoTypes'
+import { TasksType } from '../../types/todoTypes'
+import Task from '../task/Task'
 
 const List = () => {
   const params = useParams<any>()
   const { currentUser } = useAuth()
 
-  const { tasks }: Tasks = todoFireHook(currentUser.email)
+  const { tasks }: TasksType = todoFireHook(currentUser.email)
   
-  const mappingArr = tasks.filter(task => task.list === params.id)
+  const mappingArr = tasks.filter(task => task.list === params.id && task.isDone === false)
   const taskRef = useRef<any>()
 
   const addNewTask = () => {
@@ -24,7 +25,7 @@ const List = () => {
       <input type='text' ref={taskRef}/>
       <button onClick={addNewTask}>Add</button>
       {mappingArr.map((task, i) => (
-        <div key={i}>{task.taskName}</div>
+        <Task key={i} task={task} email={currentUser.email}></Task>
       ))}
     </div>
   )

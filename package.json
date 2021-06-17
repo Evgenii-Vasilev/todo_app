@@ -1,7 +1,7 @@
 {
   "name": "todo_app",
   "version": "1.0.0",
-  "description": "",
+  "description": "simple todo app",
   "main": "index.js",
   "scripts": {
     "start": "SERVE=true webpack serve --open",
