@@ -16,7 +16,6 @@ const plugins = [
 
 if (process.env.NODE_ENV === 'production') {
   mode = 'production'
-  target = 'browserslist'
 }
 
 if (process.env.SERVE) {
