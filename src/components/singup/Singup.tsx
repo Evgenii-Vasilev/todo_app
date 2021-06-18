@@ -4,13 +4,16 @@ import { useAuth } from '../../context/AuthContext'
 
 const Singup = () => {
   const history = useHistory()
-  const loginRef = useRef<any>()
-  const passwordRef = useRef<any>()
-  const { singup, currentUser } = useAuth()
+  const loginRef = useRef<HTMLInputElement>(null)
+  const passwordRef = useRef<HTMLInputElement>(null)
+  const { singup, login, currentUser } = useAuth()
 
-  const register = (e: any) => {
-    e.preventDefault()
-    singup(loginRef.current.value, passwordRef.current.value)
+  const register = () => {
+    singup(loginRef?.current?.value, passwordRef?.current?.value)
+  }
+
+  const logIn = () => {
+    login(loginRef?.current?.value, passwordRef?.current?.value)
   }
 
   if (currentUser) history.push('/main')
@@ -20,6 +23,7 @@ const Singup = () => {
       <input type='text' ref={loginRef} />
       <input type='text' ref={passwordRef} />
       <button onClick={register}>Register</button>
+      <button onClick={logIn}>Login</button>
     </div>
   )
 }
