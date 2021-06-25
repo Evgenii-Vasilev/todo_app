@@ -25,12 +25,15 @@ const Main = () => {
     history.push(`/main/${list}`)
   }
 
-  const obj = {}
+  const toAllTasks = () => {
+    history.push(`/main/hitriiPupsik`)
+  }
 
   return (
     <div>
       <input type='text' ref={newListRef} />
       <button onClick={addNewList}>Add</button>
+      <button onClick={toAllTasks}>Show All Tasks</button>
       {Object.keys(lists).map((list) => (
         <div className='list' key={list} onClick={() => toList(list)}>
           {list}

@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext'
 import createTask from '../../firebase/functions/createTask'
 import todoFireHook from '../../firebase/hooks/todoFireHook'
 import { TasksType } from '../../types/todoTypes'
+import GoBack from '../buttons/GoBack'
 import Task from '../task/Task'
 
 const List = () => {
@@ -22,6 +23,7 @@ const List = () => {
 
   return (
     <div>
+      <GoBack />
       <input type='text' ref={taskRef}/>
       <button onClick={addNewTask}>Add</button>
       {mappingArr.map((task, i) => (
