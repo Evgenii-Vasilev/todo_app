@@ -1,3 +1,4 @@
+import './App.scss'
 import { Switch, Route, Redirect } from 'react-router'
 // @ts-ignore
 import { AuthProvider } from '../context/AuthContext'

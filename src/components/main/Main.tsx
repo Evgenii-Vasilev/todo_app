@@ -15,7 +15,8 @@ const Main = () => {
 
   const addNewList = async () => {
     try {
-      createList(currentUser.email, newListRef.current.value)
+      await createList(currentUser.email, newListRef.current.value)
+      newListRef.current.value = ''
     } catch (e) {
       console.error(e)
     }

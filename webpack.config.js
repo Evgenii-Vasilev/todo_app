@@ -27,8 +27,9 @@ module.exports = {
   entry: './src/index.tsx',
 
   output: {
+    filename: '[name][fullhash].js',
     path: path.resolve(__dirname, 'dist'),
-    assetModuleFilename: 'images/[hash][ext][query]',
+    assetModuleFilename: 'images/[fullhash][ext][query]',
   },
 
   module: {

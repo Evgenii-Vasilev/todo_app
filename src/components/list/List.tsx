@@ -18,6 +18,7 @@ const List = () => {
 
   const addNewTask = () => {
     createTask(currentUser.email, params.id, taskRef.current.value)
+    taskRef.current.value = ''
   }
 
 
