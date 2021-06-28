@@ -1,8 +1,12 @@
 import { useRef } from 'react'
 import { useHistory } from 'react-router-dom'
+
 import { useAuth } from '../../context/AuthContext'
-import createList from '../../firebase/functions/createList'
+
+import { List, ListItem, ListItemText, Box, Input, Button } from '@material-ui/core'
+
 import todoFireHook from '../../firebase/hooks/todoFireHook'
+import createList from '../../firebase/functions/createList'
 
 const Main = () => {
   const history = useHistory()
@@ -11,9 +15,11 @@ const Main = () => {
   if (!currentUser) history.push('/singup')
 
   const { lists } = todoFireHook(currentUser.email)
-  const newListRef = useRef<any>()
+  const newListRef = useRef<any>('')
 
   const addNewList = async () => {
+    if (newListRef.current.value === '') return console.log('hui')
+
     try {
       await createList(currentUser.email, newListRef.current.value)
       newListRef.current.value = ''
@@ -31,16 +37,20 @@ const Main = () => {
   }
 
   return (
-    <div>
-      <input type='text' ref={newListRef} />
-      <button onClick={addNewList}>Add</button>
-      <button onClick={toAllTasks}>Show All Tasks</button>
-      {Object.keys(lists).map((list) => (
-        <div className='list' key={list} onClick={() => toList(list)}>
-          {list}
-        </div>
-      ))}
-    </div>
+    <Box>
+      <Input ref={newListRef} />
+      <Button variant='contained' color='primary' onClick={addNewList}>
+        Add
+      </Button>
+      <Button onClick={toAllTasks}>Show All Tasks</Button>
+      <List>
+        {Object.keys(lists).map((list) => (
+          <ListItem key={list} onClick={() => toList(list)}>
+            <ListItemText primary={list} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
   )
 }
 
