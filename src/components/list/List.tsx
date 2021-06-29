@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { useAuth } from '../../context/AuthContext'
@@ -15,26 +15,27 @@ const ListComponent = () => {
   const params = useParams<any>()
   const { currentUser } = useAuth()
 
-  const { tasks }: TasksType = todoFireHook(currentUser.email)
+  const { tasks }: TasksType = todoFireHook(currentUser?.email)
 
   const mappingArr = tasks.filter((task) => task.list === params.id && task.isDone === false)
-  const taskRef = useRef<any>()
+  const [newTask, setNewTask] = useState('')
 
   const addNewTask = () => {
-    createTask(currentUser.email, params.id, taskRef.current.value)
-    taskRef.current.value = ''
+    if (newTask.trim() === '') return console.log('hui')
+    createTask(currentUser?.email, params.id, newTask)
+    setNewTask('')
   }
 
   return (
     <Box>
       <GoBack />
-      <Input ref={taskRef} />
+      <Input value={newTask} onChange={e => setNewTask(e.target.value)}/>
       <Button variant='contained' color='primary' onClick={addNewTask}>
         Add
       </Button>
       <List>
         {mappingArr.map((task, i) => (
-          <Task key={i} task={task} email={currentUser.email}></Task>
+          <Task key={i} task={task} email={currentUser?.email}></Task>
         ))}
       </List>
     </Box>

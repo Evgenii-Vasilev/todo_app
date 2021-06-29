@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { useAuth } from '../../context/AuthContext'
@@ -15,14 +15,13 @@ const Main = () => {
   if (!currentUser) history.push('/singup')
 
   const { lists } = todoFireHook(currentUser.email)
-  const newListRef = useRef<any>('')
+  const [newList, setNewList] = useState('')
 
   const addNewList = async () => {
-    if (newListRef.current.value === '') return console.log('hui')
-
+    if (newList.trim() === '') return console.log('hui')
     try {
-      await createList(currentUser.email, newListRef.current.value)
-      newListRef.current.value = ''
+      await createList(currentUser.email, newList)
+      setNewList('')
     } catch (e) {
       console.error(e)
     }
@@ -38,7 +37,7 @@ const Main = () => {
 
   return (
     <Box>
-      <Input ref={newListRef} />
+      <Input value={newList} onChange={(e) => setNewList(e.target.value)} />
       <Button variant='contained' color='primary' onClick={addNewList}>
         Add
       </Button>

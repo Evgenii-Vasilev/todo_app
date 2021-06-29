@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 
-import {ListItem, ListItemText, Checkbox} from '@material-ui/core'
+import { ListItem, ListItemText, Checkbox } from '@material-ui/core'
 
 import executeTask from '../../firebase/functions/executeTask'
 import { TaskType } from '../../types/todoTypes'
@@ -12,7 +12,6 @@ interface PropTypes {
 }
 
 const Task: FC<PropTypes> = ({ task, email }) => {
-
   const [taskIsDone, setTaskDone] = useState(false)
 
   const changeIsDone = async (task: TaskType) => {
@@ -20,7 +19,7 @@ const Task: FC<PropTypes> = ({ task, email }) => {
       setTaskDone(true)
       setTimeout(() => {
         executeTask(email, task)
-
+        setTaskDone(false)
       }, 500)
     } catch (e) {
       console.error(e)
@@ -29,7 +28,7 @@ const Task: FC<PropTypes> = ({ task, email }) => {
 
   return (
     <ListItem>
-      <ListItemText primary={task.taskName}/>
+      <ListItemText primary={task.taskName} />
       <Checkbox
         inputProps={{ 'aria-label': 'primary checkbox' }}
         checked={taskIsDone}
