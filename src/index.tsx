@@ -12,13 +12,13 @@ import store from './redux/rootReducer'
 ReactDOM.render(
   <React.StrictMode>
     <Route>
-      {/* <Provider store={store}> */}
-      <ScopedCssBaseline>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
-      </ScopedCssBaseline>
-      {/* </Provider> */}
+      <Provider store={store}>
+        <ScopedCssBaseline>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+        </ScopedCssBaseline>
+      </Provider>
     </Route>
   </React.StrictMode>,
   document.getElementById('root')

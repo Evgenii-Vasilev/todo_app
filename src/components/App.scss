@@ -1,8 +1,25 @@
-*{
+* {
   margin: 0;
   padding: 0;
 }
 
-// #root{
-//   height: 100vh;
-// }
+.list__icon:hover {
+  transform: scale(1.1);
+  transition: 0.2s linear;
+}
+
+.animation {
+  animation: 0.5s linear 0.5s infinite alternate cover;
+}
+
+@keyframes cover {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

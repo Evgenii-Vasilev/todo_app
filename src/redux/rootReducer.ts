@@ -1,9 +1,10 @@
-import { combineReducers, createStore, applyMiddleware } from "redux";
+import { combineReducers, createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
+import popup from './popup/popupReducer'
 
 const rootReducer = combineReducers({
-
+  popup,
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
